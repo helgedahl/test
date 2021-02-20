@@ -1,1 +1,41 @@
-This is the testfile
+@startuml
+skinparam sequence{
+ArrowColor #FFCD00
+ArrowFontSize 12
+ActorFontColor #333333
+ActorFontStyle bold
+ActorFontSize 12
+ActorBackgroundColor #fefefe
+ActorBorderColor #FFCD00
+LifeLineBorderColor #999999
+LifeLineBackgroundColor #dddddd
+ParticipantBorderColor #FFCD00
+ParticipantBackgroundColor #ffffff
+ParticipantFontColor #333333
+NodeFontStyle bold
+NodeBorderColor #FFCD00
+NodeBackgroundColor #fefefe
+NodeFontColor #333333
+NodeFontStyle bold
+linetype ortho
+}
+
+Participant "Vendor" as vendor
+Participant "TSP" as tsp
+Participant "TSP Root CA" as rca
+
+activate tsp
+activate vendor
+vendor -> vendor : Generate RSA key pair Kvendor-sig
+vendor -> vendor : Create CSR for Kvendor-sig
+vendor -> tsp : Transmit CSR
+deactivate vendor
+tsp -> tsp : Verify CSR
+activate rca
+tsp -> rca : Issue certificate for CSR
+tsp <- rca : Certificate
+deactivate rca
+activate vendor
+vendor <- tsp : Transmit certificate
+
+@enduml
