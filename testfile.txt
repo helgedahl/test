@@ -26,7 +26,7 @@ Participant "TSP Root CA" as rca
 
 activate tsp
 activate vendor
-vendor -> vendor : Generate RSA key pair Kvendor-sig
+vendor -> vendor : Generate RSA key pair Kvendor-sig 123
 vendor -> vendor : Create CSR for Kvendor-sig
 vendor -> tsp : Transmit CSR
 deactivate vendor
