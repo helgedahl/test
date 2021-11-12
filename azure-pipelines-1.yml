@@ -28,7 +28,7 @@ stages:
           arguments: 'pods'
 
 - stage: 'Test'
-  displayName: 'Deploy to the dev environment'
+  displayName: 'Deploy to the test environment'
   dependsOn: Dev
   #condition: |
   #  and
