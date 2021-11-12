@@ -29,13 +29,12 @@ stages:
           connectionType: 'Kubernetes Service Connection'
           kubernetesServiceEndpoint: 'Dev-dev-pos-tms-aks-01-default-1636706749465'
           namespace: 'default'
-          command: 'apply'
-          secretType: 'dockerRegistry'
-          containerRegistryType: 'Azure Container Registry'
+          command: 'get'
+          arguments: 'pods'
 
-- stage: 'Dev'
+- stage: 'Test'
   displayName: 'Deploy to the dev environment'
-  #dependsOn: Build
+  dependsOn: Dev
   #condition: |
   #  and
   #  (
@@ -52,6 +51,5 @@ stages:
           connectionType: 'Kubernetes Service Connection'
           kubernetesServiceEndpoint: 'Dev-dev-pos-tms-aks-01-default-1636706749465'
           namespace: 'default'
-          command: 'apply'
-          secretType: 'dockerRegistry'
-          containerRegistryType: 'Azure Container Registry'
+          command: 'get'
+          arguments: 'pods'
