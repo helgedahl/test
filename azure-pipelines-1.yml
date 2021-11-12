@@ -4,16 +4,54 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+- none
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: 'Dev'
+  displayName: 'Deploy to the dev environment'
+  #dependsOn: Build
+  #condition: |
+  #  and
+  #  (
+  #    succeeded(),
+  #    eq(variables['Build.SourceBranchName'], variables['releaseBranchName'])
+  #  )
+  jobs:
+  - deployment: Deploy
+    environment: Dev
+  - job: 
+    steps:
+      - task: Kubernetes@1
+        inputs:
+          connectionType: 'Kubernetes Service Connection'
+          kubernetesServiceEndpoint: 'Dev-dev-pos-tms-aks-01-default-1636706749465'
+          namespace: 'default'
+          command: 'apply'
+          secretType: 'dockerRegistry'
+          containerRegistryType: 'Azure Container Registry'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- stage: 'Dev'
+  displayName: 'Deploy to the dev environment'
+  #dependsOn: Build
+  #condition: |
+  #  and
+  #  (
+  #    succeeded(),
+  #    eq(variables['Build.SourceBranchName'], variables['releaseBranchName'])
+  #  )
+  jobs:
+  - deployment: Deploy
+    environment: Dev
+  - job: 
+    steps:
+      - task: Kubernetes@1
+        inputs:
+          connectionType: 'Kubernetes Service Connection'
+          kubernetesServiceEndpoint: 'Dev-dev-pos-tms-aks-01-default-1636706749465'
+          namespace: 'default'
+          command: 'apply'
+          secretType: 'dockerRegistry'
+          containerRegistryType: 'Azure Container Registry'
