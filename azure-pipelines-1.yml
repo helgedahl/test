@@ -30,12 +30,6 @@ stages:
 - stage: 'Test'
   displayName: 'Deploy to the test environment'
   dependsOn: Dev
-  #condition: |
-  #  and
-  #  (
-  #    succeeded(),
-  #    eq(variables['Build.SourceBranchName'], variables['releaseBranchName'])
-  #  )
   jobs:
   - deployment: Deploy
     environment: Test
