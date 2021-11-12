@@ -43,7 +43,7 @@ stages:
   #  )
   jobs:
   - deployment: Deploy
-    environment: Dev
+    environment: Test
   - job: 
     steps:
       - task: Kubernetes@1
