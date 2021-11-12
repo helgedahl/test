@@ -16,16 +16,18 @@ stages:
   #  )
   jobs:
   - deployment: Deploy
-    environment: Dev
-  - job: 
-    steps:
-      - task: Kubernetes@1
-        inputs:
-          connectionType: 'Kubernetes Service Connection'
-          kubernetesServiceEndpoint: 'Dev-dev-pos-tms-aks-01-default-1636706749465'
-          namespace: 'default'
-          command: 'get'
-          arguments: 'pods'
+    environment: Dev 
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              kubernetesServiceEndpoint: 'Dev-dev-pos-tms-aks-01-default-1636706749465'
+              namespace: 'default'
+              command: 'get'
+              arguments: 'pods'
 
 - stage: 'Test'
   displayName: 'Deploy to the test environment'
@@ -33,12 +35,14 @@ stages:
   jobs:
   - deployment: Deploy
     environment: Test
-  - job: 
-    steps:
-      - task: Kubernetes@1
-        inputs:
-          connectionType: 'Kubernetes Service Connection'
-          kubernetesServiceEndpoint: 'Test-ext-pos-tms-aks-01-default-1636706795336'
-          namespace: 'default'
-          command: 'get'
-          arguments: 'pods'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              kubernetesServiceEndpoint: 'Dev-dev-pos-tms-aks-01-default-1636706749465'
+              namespace: 'default'
+              command: 'get'
+              arguments: 'pods'
