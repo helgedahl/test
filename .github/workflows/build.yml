@@ -9,11 +9,13 @@ jobs:
   docker-build:
     runs-on: ubuntu-latest
     steps:
+      - name: Echo
+        run: echo ${DOCKER_REGISTRY}
       - uses: azure/docker-login@v1
         # this logs us into GitHub Packages (docker service)
         with:
-          # login-server: docker.pkg.github.com
-          login-server: ghcr.io
+          login-server: docker.pkg.github.com
+          # login-server: ghcr.io
           username: ${GITHUB_ACTOR}
           password: ${{ secrets.PAT }}
       - name: Pull a known image
