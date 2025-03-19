@@ -9,10 +9,6 @@ jobs:
   docker-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Set DOCKER_IMAGE
-        # this sets an environment variable subsequent steps in the same job can use
-        run: |
-          echo "::set-env name=DOCKER_IMAGE::${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123456"
       - uses: azure/docker-login@v1
         # this logs us into GitHub Packages (docker service)
         with:
@@ -22,6 +18,6 @@ jobs:
       - name: Pull a known image
         run: docker pull debian:buster-slim
       - name: Re-tag that image
-        run: docker image tag debian:buster-slim ${DOCKER_IMAGE}
+        run: docker image tag debian:buster-slim ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123456
       - name: Push that image
-        run: docker push ${DOCKER_IMAGE}
+        run: docker push ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123456
