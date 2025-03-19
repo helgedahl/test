@@ -2,7 +2,8 @@ name: release
 on: workflow_dispatch
 
 env:
-  DOCKER_REGISTRY: docker.pkg.github.com
+  #DOCKER_REGISTRY: docker.pkg.github.com
+  DOCKER_REGISTRY: ghcr.io
   GITHUB_PACKAGE: my-package
 
 jobs:
@@ -26,8 +27,6 @@ jobs:
       - name: Pull a known image
         run: docker pull debian:buster-slim
       - name: Re-tag that image
-        run: docker image tag debian:buster-slim ghcr.io/${{ github.repository }}/${GITHUB_PACKAGE}:123459
-        #run: docker image tag debian:buster-slim ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:12345
+        run: docker image tag debian:buster-slim ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:12345
       - name: Push that image
-        run: docker push ghcr.io/${{ github.repository }}/${GITHUB_PACKAGE}:123459
-        #run: docker push ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123459
+        run: docker push ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123459
