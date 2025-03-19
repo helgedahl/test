@@ -27,7 +27,7 @@ jobs:
       - uses: docker/login-action@v2
         with:
           registry: ${{ env.DOCKER_REGISTRY }}
-          username: ${GITHUB_ACTOR}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       #- name: Pull a known image
       #  run: docker pull debian:buster-slim
