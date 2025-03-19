@@ -40,7 +40,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/${{ env.GITHUB_PACKAGE }}:${{ $env.GITHUB_TAG }}
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/${{ env.GITHUB_PACKAGE }}:${{ env.GITHUB_TAG }}
       - name: Dispatch release
         run: |
           curl -X POST \
