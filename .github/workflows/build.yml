@@ -18,6 +18,6 @@ jobs:
       - name: Pull a known image
         run: docker pull debian:buster-slim
       - name: Re-tag that image
-        run: docker image tag debian:buster-slim ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123456
+        run: docker image tag debian:buster-slim ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123457
       - name: Push that image
-        run: docker push ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123456
+        run: docker push ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123457
