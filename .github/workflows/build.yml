@@ -12,8 +12,7 @@ jobs:
       - name: Set DOCKER_IMAGE
         # this sets an environment variable subsequent steps in the same job can use
         run: |
-          TAG=$(echo "${{ github.ref }}" | cut -d'/' -f3)
-          echo "::set-env name=DOCKER_IMAGE::${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:${TAG}"
+          echo "::set-env name=DOCKER_IMAGE::${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123456"
       - uses: azure/docker-login@v1
         # this logs us into GitHub Packages (docker service)
         with:
