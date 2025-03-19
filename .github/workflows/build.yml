@@ -28,4 +28,5 @@ jobs:
       - name: Re-tag that image
         run: docker image tag debian:buster-slim ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123459
       - name: Push that image
-        run: docker push ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123459
+        run: docker push ghcr.io/${{ github.repository }}/${GITHUB_PACKAGE}:123459
+        #run: docker push ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123459
