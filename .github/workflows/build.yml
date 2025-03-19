@@ -4,7 +4,7 @@ on: workflow_dispatch
 env:
   DOCKER_REGISTRY: docker.pkg.github.com
   #DOCKER_REGISTRY: ghcr.io
-  GITHUB_PACKAGE: another-package
+  GITHUB_PACKAGE: my-package
 
 jobs:
   docker-build:
