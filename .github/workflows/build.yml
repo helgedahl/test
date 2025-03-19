@@ -12,12 +12,13 @@ jobs:
       - uses: azure/docker-login@v1
         # this logs us into GitHub Packages (docker service)
         with:
-          login-server: docker.pkg.github.com
+          # login-server: docker.pkg.github.com
+          login-server: ghcr.io
           username: ${GITHUB_ACTOR}
           password: ${{ secrets.PAT }}
       - name: Pull a known image
         run: docker pull debian:buster-slim
       - name: Re-tag that image
-        run: docker image tag debian:buster-slim ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123458
+        run: docker image tag debian:buster-slim ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123459
       - name: Push that image
-        run: docker push ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123458
+        run: docker push ${DOCKER_REGISTRY}/${{ github.repository }}/${GITHUB_PACKAGE}:123459
