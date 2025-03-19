@@ -5,7 +5,7 @@ env:
   #DOCKER_REGISTRY: docker.pkg.github.com
   DOCKER_REGISTRY: ghcr.io
   GITHUB_PACKAGE: another-package
-  GITHUB_TAG: 123456789
+  GITHUB_TAG: ${{ github.sha }}
 
 jobs:
   docker-build:
@@ -40,12 +40,12 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/${{ env.GITHUB_PACKAGE }}:${{ github.sha }}
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/${{ env.GITHUB_PACKAGE }}:${{ $env.GITHUB_TAG }}
       - name: Dispatch release
         run: |
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.PAT_BEARER }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/helgedahl/test2/dispatches \
-            -d '{"event_type":"package_published","client_payload":{"package":"${GITHUB_PACKAGE}"}}'
+            -d '{"event_type":"package_published","client_payload":{"package":"${GITHUB_PACKAGE}", "tag":"${GITHUB_TAG}" }}'
       
