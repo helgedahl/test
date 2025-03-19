@@ -13,7 +13,7 @@ jobs:
       
       - name: Echo image tag
         run: |
-          PACKAGE_INFO="${{ github.event.registry_package }}"
+          PACKAGE_INFO="${{ github.event.registry_package.name }}"
           echo ${PACKAGE_INFO}
           # Extract the tag from the event
           IMAGE_TAG="${{ github.event.registry_package.package_version.container_metadata.tag.name }}"
