@@ -12,10 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # Extract metadata (tags, labels) for Docker
+      # https://github.com/docker/metadata-action
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5.7.0
+        with:
+          images: ghcr.io/${{ github.repository }}
       - name: Echo
         run: |
           echo ${DOCKER_REGISTRY}
           echo ${GITHUB_ACTOR}
+          echo ${{ steps.meta.outputs.tags }}
+          
       #- name: Echo2
       #  run: echo ${GITHUB_ACTOR}
       #- uses: azure/docker-login@v1
