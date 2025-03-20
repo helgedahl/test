@@ -19,7 +19,7 @@ jobs:
         uses: docker/metadata-action@v5.7.0
         with:
           images: ghcr.io/${{ github.repository }}
-          tags: ${GITHUB_TAG}
+          tags: ${{ env.GITHUB_TAG }}
       - name: Echo
         run: |
           echo ${DOCKER_REGISTRY}
